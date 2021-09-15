@@ -5,7 +5,14 @@ Source Code From https://github.com/grpc-up-and-running/samples/archive/refs/tag
 
 
 ## gRPC入门
-见docs/gRPC入门.doc
+文档 docs/gRPC入门.doc
 
 ## 开始使用gRPC
-见docs/开始使用gRPC.doc
+文档 docs/开始使用gRPC.doc
+
+代码示例 src/productinfo
+
+## gRPC的通信模式
+文档 docs/gRPC的通信模式
+
+代码示例 src/ordermgt

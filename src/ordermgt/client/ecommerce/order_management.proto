@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+// 导入这个包，从而使用常见的类型，如StringValue。
+import "google/protobuf/wrappers.proto";
+
+option go_package = "./ecommerce";
+
+package ecommerce;
+
+service OrderManagement {
+    rpc addOrder(Order) returns (google.protobuf.StringValue);
+    // 检索订单的远程方法。
+    rpc getOrder(google.protobuf.StringValue) returns (Order);
+    // 通过返回0rder消息的stream定义服务器端流。
+    rpc searchOrders(google.protobuf.StringValue) returns (stream Order);
+    // 使用strean order 作为updateOrders方法的参数，表明updateOrders会接收来自客户端的多条消息作为输入。
+    // 因为服务器端只发送一个响应，所以返回值是单一的字符串消息。
+    rpc updateOrders(stream Order) returns (google.protobuf.StringValue);
+    // 定义一个 processOrders 方法，该方法接受一个字符串流作为方法参数，代表了订单流ID并且以CombinedShipment流作为方法的返回值。
+    // 因此，通过将方法参数和返回参数均声明为stream，可以定义双向流的RPC方法。
+    // 发货组合的消息也是通过服务定义声明的，它包含了订单元素的列表。
+    // 在双向流RPC模式中，将方法参数和返回参数均声明为stream
+    rpc processOrders(stream google.protobuf.StringValue) returns (stream CombinedShipment);
+}
+
+// 定义order类型。
+message Order {
+    string id = 1;
+    // 使用repeated表明这个字段在消息中可以重复出现任意次，包括0次。在这里，一条订单消息可以有任意数量的条目。
+    repeated string items = 2;
+    string description = 3;
+    float price = 4;
+    string destination = 5;
+}
+
+// CombinedShipment 消息的结构。
+message CombinedShipment {
+    string id = 1;
+    string status = 2;
+    repeated Order ordersList = 3;
+}
