@@ -1,0 +1,37 @@
+// 服务定义首先声明所使用的protocol buffers版本(proto3)。
+syntax = "proto3";
+
+// 生成代码的路径
+option go_package = "./ecommerce";
+
+// 用来防止协议消息类型之间发生命名冲突的包名，该包名也会用来生成代码。
+package ecommerce;
+
+// 自定义gRPC服务的接口。
+service ProductInfo {
+    // 添加商品的远程方法，该方法会返回商品ID作为响应。
+    rpc addProduct(Product) returns (ProductID);
+    // 基于商品ID获取商品的远程方法。
+    rpc getProduct(ProductID) returns (Product);
+}
+
+// 定义Product的消息格式或类型。
+message Product {
+    // 保存商品ID的字段(名-值对)，具有唯一的字段编号，该编号用来在二进制格式消息中识别字段。
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    float price = 4;
+}
+
+// 用于商品标识号的用户定义类型。
+message ProductID {
+    string value = 1;
+}
+
+// 服务就是可被远程调用的一组方法，比如addProduct方法和getProduct方法。
+// 每个方法都有输入参数和返回类型，既可以被定义为服务的一部分， 也可以导入protocol buffers定义中。
+// 输入参数和返回参数既可以是用户定义类型，比如Product类型和ProductID类型，也可以是服务定义中已经定义好的protocol buffers 已知类型。
+// 这些类型会被构造成消息，每条消息都是包含一系列名 - 值对信息的小型逻辑记录，这些名 - 值对叫作字段。
+// 这些字段都是具有唯一编号的名 - 值对(如string id = 1)，在二进制形式消息中，可以用编号来识别相应字段。
+

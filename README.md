@@ -18,6 +18,13 @@ Source Code From https://github.com/grpc-up-and-running/samples/archive/refs/tag
         -   [多路复用](#多路复用)
         -   [元数据](#元数据)
         -   [负载均衡](#负载均衡)
+    -   [安全的gRPC](#安全的grpc)
+        -   [使用TLS认证gRPC通道](#使用tls认证grpc通道)
+            -   [启用单向安全连接](#启用单向安全连接)
+            -   [启用mTLS保护的连接](#启用mtls保护的连接)
+        -   [对gRPC调用进行认证](#对grpc调用进行认证)
+            -   [使用basic认证](#使用basic认证)
+            -   [使用OAuth2.0、JWT和基于令牌的谷歌认证](#使用oauth2.0jwt和基于令牌的谷歌认证)
 
 ## gRPC入门
 docs/gRPC入门.doc
@@ -58,3 +65,22 @@ src/metadata
 
 ### 负载均衡
 src/loadbalancing
+
+## 安全的gRPC
+docs/安全的gRPC.doc
+
+### 使用TLS认证gRPC通道
+
+#### 启用单向安全连接
+src/secure-channel
+
+#### 启用mTLS保护的连接
+src/mutual-tls-channel
+
+### 对gRPC调用进行认证
+
+#### 使用basic认证
+src/basic-authentication
+
+#### 使用OAuth2.0、JWT和基于令牌的谷歌认证
+src/token-based-authentication
