@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+// 生成代码的路径
+option go_package = "./proto";
+
+package proto;
+
+service ProductInfo {
+    rpc addProduct(Product) returns (google.protobuf.StringValue);
+    rpc getProduct(google.protobuf.StringValue) returns (Product);
+}
+
+message Product {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    float price = 4;
+}

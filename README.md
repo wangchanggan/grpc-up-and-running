@@ -25,6 +25,16 @@ Source Code From https://github.com/grpc-up-and-running/samples/archive/refs/tag
         -   [对gRPC调用进行认证](#对grpc调用进行认证)
             -   [使用basic认证](#使用basic认证)
             -   [使用OAuth2.0、JWT和基于令牌的谷歌认证](#使用oauth2.0jwt和基于令牌的谷歌认证)
+    -   [在生产环境中运行gRPC](#在生产环境中运行grpc)
+        -   [测试gRPC应用程序](#测试grpc应用程序)
+        -   [部署](#部署)
+            -   [部署到Docker上](#部署到docker上)
+            -   [部署到Kubernetes上](#部署到kubernetes上)
+        -   [可观察性](#可观察性)
+            -   [度量指标](#度量指标)
+                -   [在gRPC中使用OpenCensus](#在grpc中使用opencensus)
+                -   [在gRPC中使用Prometheus](#在grpc中使用prometheus)
+            -   [跟踪](#跟踪)
 
 ## gRPC入门
 docs/gRPC入门.doc
@@ -84,3 +94,29 @@ src/basic-authentication
 
 #### 使用OAuth2.0、JWT和基于令牌的谷歌认证
 src/token-based-authentication
+
+## 在生产环境中运行gRPC
+docs/在生产环境中运行gRPC.doc
+
+### 测试gRPC应用程序
+src/grpc-continous-integration
+
+### 部署
+#### 部署到Docker上
+src/grpc-docker
+
+#### 部署到Kubernetes上
+src/grpc-kubernetes
+
+### 可观察性
+#### 度量指标
+##### 在gRPC中使用OpenCensus
+src/grpc-opencensus
+
+##### 在gRPC中使用Prometheus
+src/grpc-prometheus
+
+#### 跟踪
+src/grpc-opencensus-tracing
+
+src/grpc-opentracing

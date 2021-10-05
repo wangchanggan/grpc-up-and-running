@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  # Nginx Ingress控制器相关的注解，指定gRPC作为后端协议。
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+  name: grpc-prodinfo-ingress
+spec:
+  rules:
+    # 暴露给外部的主机名。
+  - host: productinfo
+    http:
+      paths:
+      - backend:
+          # 关联的Kubernetes Service的名称。
+          serviceName: productinfo
+          # 在Kubernetes Service中所声明的服务端口名称。
+          servicePort: grpc
