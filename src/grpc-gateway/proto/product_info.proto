@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+// 导入proto文件 (google/api/annotations.proto)以添加对协议定义的注解支持。
+import "google/api/annotations.proto";
+
+// 生成代码的路径
+option go_package = "./proto";
+
+package proto;
+
+service ProductInfo {
+    rpc addProduct(Product) returns (google.protobuf.StringValue) {
+        // 为addProduct方法添加gRPC/HTTP映射。声明URL路径模板（/v1/product)、 HTTP方法 (post)以及消息体的样子。
+        // 消息体映射使用了“*”，表示没有在路径模板绑定的所有字段都应该映射到请求体中。
+        option (google.api.http) = {
+            post: "/v1/product"
+            body: "*"
+        };
+    }
+    rpc getProduct(google.protobuf.StringValue) returns (Product) {
+         // 为getProduct方法添加gRPC/HTTP映射。这里是一个GET方法，URL路径模板是/v1/product/{value}，传入的ProductID作为路径参数。
+         option (google.api.http) = {
+             get:"/v1/product/{value}"
+         };
+    }
+}
+
+message Product {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    float price = 4;
+}

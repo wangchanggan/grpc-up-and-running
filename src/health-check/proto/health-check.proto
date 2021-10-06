@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package grpc.health.v1;
+
+service ProductInfo {
+    rpc addProduct(Product) returns (google.protobuf.StringValue);
+    rpc getProduct(google.protobuf.StringValue) returns (Product);
+}
+
+// 健康检查请求的消息结构。
+message HealthCheckRequest {
+    string service = 1;
+}
+
+// 带有服务状态的健康检查响应。
+message HealthCheckResponse {
+    enum ServiceStatus {
+        UNKNOWN = 0;
+        SERVING = 1;
+        NOT_SERVING = 2;
+    }
+    ServingStatus status = 1;
+}
+
+service Health {
+   // 客户端可以通过调用Check方法查询服务器的健康状态。
+   rpc Check(HealthCheckRequest) returns (HealthCheckResponse);
+   // 客户端可以通过调用Watch方法执行流式健康检查。
+   rpc Watch(HealthCheckRequest) returns (HealthCheckResponse);
+}
