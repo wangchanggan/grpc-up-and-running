@@ -135,3 +135,4 @@ src/grpc-gateway
 src/server-reflection
 
 ### 健康检查协议
+src/health-check
